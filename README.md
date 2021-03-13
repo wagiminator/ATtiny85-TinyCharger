@@ -67,7 +67,7 @@ Since there is no ICSP header on the board, you have to program the ATtiny eithe
 # Operating Instructions
 1. Connect the device via the micro-USB or USB-C port to a power supply that can provide sufficient current.
 2. Use the SET button to select the maximum charging current. Note that it can overshoot by a few milliamperes!
-3. Connect the Li-Ion battery to one of the charging connections. Pay attention to the correct polarity!
+3. Connect the Li-Ion battery to one of the battery connectors. Pay attention to the correct polarity!
 4. The battery is charged immediately. The SET button is locked during the charging process to prevent the charging current from being changed accidentally. The charging process stops automatically when the battery is fully charged. The total charging time and the charged capacity remain displayed as long as the device is supplied with power. These values can be reset using the RESET button.
 
 ![pic5.jpg](https://raw.githubusercontent.com/wagiminator/ATtiny85-TinyCharger/main/documentation/TinyCharger_pic5.jpg)
