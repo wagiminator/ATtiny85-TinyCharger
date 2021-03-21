@@ -53,7 +53,7 @@ Since there is no ICSP header on the board, you have to program the ATtiny eithe
 - Connect your programmer to your PC and to the ATtiny.
 - Open a terminal.
 - Navigate to the folder with the hex-file.
-- Execute the following command (if necessary replace "usbasp" with the programmer you use):
+- Execute the following command (if necessary replace "t85" with your chip and "usbasp" with the programmer you use):
   ```
   avrdude -c usbasp -p t85 -U lfuse:w:0xe2:m -U hfuse:w:0xd5:m -U efuse:w:0xff:m -U flash:w:tinycharger.hex
   ```
@@ -74,6 +74,7 @@ Since there is no ICSP header on the board, you have to program the ATtiny eithe
 
 ![pic5.jpg](https://raw.githubusercontent.com/wagiminator/ATtiny85-TinyCharger/main/documentation/TinyCharger_pic5.jpg)
 
+# Characteristics
 |Parameter|Value|
 |:-|:-|
 |Supply Voltage|4.3 - 5.5V|
