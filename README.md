@@ -5,7 +5,7 @@ TinyCharger is an ATtiny25/45/85-based, single-cell Li-ion battery charger with 
 
 # Hardware
 ## Power Connectors
-The device is equipped with a micro USB and a USB-C connector for power supply. Only one connector can be used at a time. The supply voltage must be 5V.
+The device is equipped with a Micro-USB and a USB-C connector for power supply. Only one connector can be used at a time. The supply voltage must be 5V.
 
 ## Battery Connectors
 The device is equipped with a JST-PH 2.0mm socket and a 2.54mm pin header for connection to the battery. Only one battery can be charged at a time.
@@ -18,6 +18,8 @@ An [INA219](https://www.ti.com/lit/ds/symlink/ina219.pdf) is used to measure vol
 
 ## User Interface
 The user interface utilizes two buttons and a [128x64 pixels OLED display](http://aliexpress.com/wholesale?SearchText=128+64+0.96+oled+new+4pin). An [ATtiny25/45/85](https://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-2586-AVR-8-bit-Microcontroller-ATtiny25-ATtiny45-ATtiny85_Datasheet.pdf) microcontroller handles the user interface as well as the control and monitoring of the charging functions.
+
+![pic4.jpg](https://raw.githubusercontent.com/wagiminator/ATtiny85-TinyCharger/main/documentation/TinyCharger_pic4.jpg)
 
 # Software
 ## Basic Principle
@@ -65,7 +67,7 @@ Since there is no ICSP header on the board, you have to program the ATtiny eithe
 - Run "make install" to compile, burn the fuses and upload the firmware.
 
 # Operating Instructions
-1. Connect the device via the micro-USB or USB-C port to a power supply that can provide sufficient current.
+1. Connect the device via the Micro-USB or USB-C port to a 5V power supply that can provide sufficient current.
 2. Use the SET button to select the maximum charging current. Note that it can overshoot by a few milliamperes!
 3. Connect the Li-Ion battery to one of the battery connectors. Pay attention to the correct polarity!
 4. The battery is charged immediately. The SET button is locked during the charging process to prevent the charging current from being changed accidentally. The charging process stops automatically when the battery is fully charged. The total charging time and the charged capacity remain displayed as long as the device is supplied with power. These values can be reset using the RESET button.
@@ -88,7 +90,6 @@ Since there is no ICSP header on the board, you have to program the ATtiny eithe
 
 ![pic2.jpg](https://raw.githubusercontent.com/wagiminator/ATtiny85-TinyCharger/main/documentation/TinyCharger_pic2.jpg)
 ![pic3.jpg](https://raw.githubusercontent.com/wagiminator/ATtiny85-TinyCharger/main/documentation/TinyCharger_pic3.jpg)
-![pic4.jpg](https://raw.githubusercontent.com/wagiminator/ATtiny85-TinyCharger/main/documentation/TinyCharger_pic4.jpg)
 
 # License
 ![license.png](https://i.creativecommons.org/l/by-sa/3.0/88x31.png)
