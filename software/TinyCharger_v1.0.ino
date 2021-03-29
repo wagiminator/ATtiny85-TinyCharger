@@ -9,14 +9,11 @@
 // the ATtiny via I2C. From this, the ATtiny calculates the state of
 // charge and capacity and displays the values on the OLED screen.
 //
-// The I²C OLED implementation is based on TinyOLEDdemo
-// https://github.com/wagiminator/ATtiny13-TinyOLEDdemo
-//
 //                         +-\/-+
-// RESET --- A0 (D5) PB5  1|    |8  Vcc
-// PROG1 --- A3 (D3) PB3  2|    |7  PB2 (D2) A1 ---- OLED/INA (SCK)
-// PROG2 --- A2 (D4) PB4  3|    |6  PB1 (D1) ------- SET BUTTON
-//                   GND  4|    |5  PB0 (D0) ------- OLED/INA (SDA)
+// RESET --- A0 (D5) PB5  1|°   |8  Vcc
+// PROG1 --- A3 (D3) PB3  2|    |7  PB2 (D2) A1 --- OLED/INA (SCK)
+// PROG2 --- A2 (D4) PB4  3|    |6  PB1 (D1) ------ SET BUTTON
+//                   GND  4|    |5  PB0 (D0) ------ OLED/INA (SDA)
 //                         +----+
 //
 // Core:    ATtinyCore (https://github.com/SpenceKonde/ATTinyCore)
@@ -25,10 +22,15 @@
 // Clock:   8 MHz (internal)
 // Millis:  disabled
 // B.O.D.:  2.7V
-// Leave the rest on default settings. Don't forget to "Burn bootloader" !
+// Leave the rest on default settings. Don't forget to "Burn bootloader"!
+// No Arduino core functions or libraries are used. Use the makefile if 
+// you want to compile without Arduino IDE.
 //
 // Note: The internal oscillator may need to be calibrated for precise
 //       charging capacity calculation.
+//
+// The I²C OLED implementation is based on TinyOLEDdemo
+// https://github.com/wagiminator/ATtiny13-TinyOLEDdemo
 //
 // 2021 by Stefan Wagner 
 // Project Files (EasyEDA): https://easyeda.com/wagiminator
@@ -36,8 +38,8 @@
 // License: http://creativecommons.org/licenses/by-sa/3.0/
 
 
-// oscillator calibration value (uncomment and set if necessary)
-//#define OSCCAL_VAL  0x48
+// Oscillator calibration value (uncomment and set if necessary)
+// #define OSCCAL_VAL  0x48
 
 // Libraries
 #include <avr/io.h>
@@ -55,7 +57,6 @@
 // Current limit values and battery level voltage thresholds
 uint16_t progCurrent[4] = {100, 350, 750, 1000};         // current limit values
 uint16_t batLevel[5] = {3000, 3600, 4000, 4100, 65535};  // batLevel voltage thresholds
-
 
 // -----------------------------------------------------------------------------
 // I2C Implementation
@@ -124,7 +125,6 @@ uint8_t I2C_read(uint8_t ack) {
   I2C_CLOCKOUT();                             // clock out -> slave reads ACK bit
   return(data);                               // return the received byte
 }
-
 
 // -----------------------------------------------------------------------------
 // OLED Implementation
@@ -270,7 +270,6 @@ void OLED_printDec2(uint8_t value) {
   I2C_stop();                                       // stop transmission
 }
 
-
 // -----------------------------------------------------------------------------
 // INA219 Implementation
 // -----------------------------------------------------------------------------
@@ -325,7 +324,6 @@ uint16_t INA_readCurrent(void) {
   return(result);
 }
 
-
 // -----------------------------------------------------------------------------
 // Millis Counter Implementation for Timer0
 // -----------------------------------------------------------------------------
@@ -354,7 +352,6 @@ ISR(TIM0_COMPA_vect) {
   MIL_counter++;                    // increase millis counter
 }
 
-
 // -----------------------------------------------------------------------------
 // Main Function
 // -----------------------------------------------------------------------------
@@ -377,7 +374,7 @@ int main(void) {
   uint8_t   isCharging;                       // chargin state   (0: not charging)
   uint8_t   batState;                         // state of charge (0..4)
 
-  // set oscillator calibration value
+  // Set oscillator calibration value
   #ifdef OSCCAL_VAL
     OSCCAL = OSCCAL_VAL;                      // set the value if defined above
   #endif
@@ -396,7 +393,7 @@ int main(void) {
   
   // Loop
   while(1) {  
-    // read sensors and set state variables
+    // Read sensors and set state variables
     voltage = INA_readVoltage();              // read voltage from INA219
     current = INA_readCurrent();              // read current from INA219
     isCharging  = (current > 5);              // set charging state variable
@@ -404,7 +401,7 @@ int main(void) {
     while(voltage > batLevel[batState]) batState++;
     if(isCharging && (batState == 4)) batState = 3;
     
-    // timing stuff
+    // Timing stuff
     nowmillis   = MIL_read();                 // read millis
     interval    = nowmillis - lastmillis;     // calculate time interval
     lastmillis  = nowmillis;                  // update lastmillis
@@ -415,7 +412,7 @@ int main(void) {
     seconds     = (uint32_t)duration / 1000;  // calculate total charging time in seconds   
     if (seconds > 35999) seconds = 35999;     // limit seconds timer
  
-    // check button and set charging current limit accordingly (blocked in charging mode)
+    // Check button and set charging current limit accordingly (blocked in charging mode)
     if (PINB & (1<<SETBUTTON)) lastbutton = 0;
     else if (!lastbutton) {
       if (!isCharging) {
@@ -426,7 +423,7 @@ int main(void) {
       lastbutton  = 1;
     }
     
-    // update OLED
+    // Update OLED
     OLED_setCursor(0,0);
     OLED_printChar(batState + 20);
     (isCharging) ? (OLED_printChar(19)) : (OLED_printChar(18));
