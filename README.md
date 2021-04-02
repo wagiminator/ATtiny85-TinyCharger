@@ -1,6 +1,8 @@
 # TinyCharger - Single Cell Li-Ion Battery Charger with Monitoring
 TinyCharger is an ATtiny25/45/85-based, single-cell Li-ion battery charger with selectable charging current limit (100mA - 1000mA) and an OLED display for monitoring.
 
+- Design Files (EasyEDA): https://easyeda.com/wagiminator/attiny85-lipo-charger
+
 ![pic1.jpg](https://raw.githubusercontent.com/wagiminator/ATtiny85-TinyCharger/main/documentation/TinyCharger_pic1.jpg)
 
 # Hardware
@@ -11,7 +13,7 @@ The device is equipped with a Micro-USB and a USB-C connector for power supply. 
 The device is equipped with a JST-PH 2.0mm socket and a 2.54mm pin header for connection to the battery. Only one battery can be charged at a time.
 
 ## Battery Charger
-For battery charging the [TP4056](https://datasheet.lcsc.com/szlcsc/1904031009_TPOWER-TP4056_C382139.pdf) is used. The TP4056 is a complete constant-current/constant-voltage linear charger for single cell lithium-ion batteries. The maximum charge voltage is fixed at 4.2V and the charge current can be programmed externally with a resistor. The total resistance is determined by three resistors connected in parallel, two of which can be switched on and off by the ATtiny via MOSFETs. The TP4056 automatically terminates the charge cycle when the charge current drops to 1/10th the programmed value after the final float voltage is reached. Other features include current monitor, under voltage lockout and automatic recharge.
+For battery charging the [TP4056](https://datasheet.lcsc.com/szlcsc/1904031009_TPOWER-TP4056_C382139.pdf) is used. The TP4056 is a complete constant-current/constant-voltage linear charger for single-cell lithium-ion batteries. The maximum charge voltage is fixed at 4.2V and the charge current can be programmed externally with a resistor. The total resistance is determined by three resistors connected in parallel, two of which can be switched on and off by the ATtiny via MOSFETs. The TP4056 automatically terminates the charge cycle when the charge current drops to 1/10th the programmed value after the final float voltage is reached. Other features include current monitor, under voltage lockout and automatic recharge.
 
 ## Voltage and Current Measurement
 An [INA219](https://www.ti.com/lit/ds/symlink/ina219.pdf) is used to measure voltage and current. The INA219 is a current shunt and power monitor with an I²C-compatible interface. The device monitors both shunt voltage drop and bus supply voltage, with programmable conversion times and filtering. A programmable calibration value, combined with an internal multiplier, enables direct readouts of current in amperes. The selected shunt resistance of 8 milliohms enables both a very small influence on the circuit and a measurement with a resolution of 1 milliampere. For an accurate measurement, a shunt resistor with a low tolerance (1% or better) should be selected.
