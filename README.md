@@ -1,6 +1,7 @@
 # TinyCharger - Single Cell Li-Ion Battery Charger with Monitoring
 TinyCharger is an ATtiny25/45/85-based, single-cell Li-ion battery charger with selectable charging current limit (100mA - 1000mA) and an OLED display for monitoring.
 
+- Project Video (Youtube): https://youtu.be/JtS_8n5oOiI
 - Design Files (EasyEDA): https://easyeda.com/wagiminator/attiny85-lipo-charger
 
 ![pic1.jpg](https://raw.githubusercontent.com/wagiminator/ATtiny85-TinyCharger/main/documentation/TinyCharger_pic1.jpg)
