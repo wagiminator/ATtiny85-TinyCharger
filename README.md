@@ -17,7 +17,7 @@ The device is equipped with a JST-PH 2.0mm socket and a 2.54mm pin header for co
 For battery charging the [TP4056](https://datasheet.lcsc.com/szlcsc/1904031009_TPOWER-TP4056_C382139.pdf) is used. The TP4056 is a complete constant-current/constant-voltage linear charger for single-cell lithium-ion batteries. The maximum charge voltage is fixed at 4.2V and the charge current can be programmed externally with a resistor. The total resistance is determined by three resistors connected in parallel, two of which can be switched on and off by the ATtiny via MOSFETs. The TP4056 automatically terminates the charge cycle when the charge current drops to 1/10th the programmed value after the final float voltage is reached. Other features include current monitor, under voltage lockout and automatic recharge.
 
 ## Voltage and Current Measurement
-An [INA219](https://www.ti.com/lit/ds/symlink/ina219.pdf) is used to measure voltage and current. The INA219 is a current shunt and power monitor with an I²C-compatible interface. The device monitors both shunt voltage drop and bus supply voltage, with programmable conversion times and filtering. A programmable calibration value, combined with an internal multiplier, enables direct readouts of current in amperes. The selected shunt resistance of 8 milliohms enables both a very small influence on the circuit and a measurement with a resolution of 1 milliampere. For an accurate measurement, a shunt resistor with a low tolerance (1% or better) should be selected.
+An [INA219](https://www.ti.com/lit/ds/symlink/ina219.pdf) is used to measure voltage and current. The INA219 is a current shunt and power monitor with an I²C-compatible interface. The device monitors both shunt voltage drop and bus supply voltage, with programmable conversion times and filtering. A programmable calibration value, combined with an internal multiplier, enables direct readouts of current in amperes. The selected shunt resistance of 8mΩ enables both a very small influence on the circuit and a measurement with a resolution of 1mA. For an accurate measurement, a shunt resistor with a low tolerance (1% or better) should be selected.
 
 ## User Interface
 The user interface utilizes two buttons and a [128x64 pixels OLED display](http://aliexpress.com/wholesale?SearchText=128+64+0.96+oled+new+4pin). An [ATtiny25/45/85](https://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-2586-AVR-8-bit-Microcontroller-ATtiny25-ATtiny45-ATtiny85_Datasheet.pdf) microcontroller handles the user interface as well as the control and monitoring of the charging functions.
@@ -42,8 +42,7 @@ Since there is no ICSP header on the board, you have to program the ATtiny eithe
 - Go to **Tools -> Board -> ATtinyCore** and select **ATtiny25/45/85 (No bootloader)**.
 - Go to **Tools** and choose the following board options:
   - **Chip:**           ATtiny25 or 45 or 85 (depending on your chip)
-  - **Clock:**          8 MHz (internal)
-  - **Millis/Micros:**  disabled
+  - **Clock:**          1 MHz (internal)
   - **B.O.D.Level:**    B.O.D. enabled (2.7V)
   - Leave the rest at the default settings
 - Connect your programmer to your PC and to the ATtiny.
@@ -58,7 +57,7 @@ Since there is no ICSP header on the board, you have to program the ATtiny eithe
 - Navigate to the folder with the hex-file.
 - Execute the following command (if necessary replace "t85" with your chip and "usbasp" with the programmer you use):
   ```
-  avrdude -c usbasp -p t85 -U lfuse:w:0xe2:m -U hfuse:w:0xd5:m -U efuse:w:0xff:m -U flash:w:tinycharger.hex
+  avrdude -c usbasp -p t85 -U lfuse:w:0x62:m -U hfuse:w:0xd5:m -U efuse:w:0xff:m -U flash:w:tinycharger.hex
   ```
 
 ### If using the makefile (Linux/Mac)
