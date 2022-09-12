@@ -1,5 +1,5 @@
 # TinyCharger - Single Cell Li-Ion Battery Charger with Monitoring
-TinyCharger is an ATtiny25/45/85-based, single-cell Li-ion battery charger with selectable charging current limit (100mA - 1000mA) and an OLED display for monitoring.
+TinyCharger is an ATtiny25/45/85-based, single-cell Li-Ion battery charger with selectable charging current limit (100mA - 1000mA) and an OLED display for monitoring.
 
 - Project Video (Youtube): https://youtu.be/JtS_8n5oOiI
 - Design Files (EasyEDA): https://easyeda.com/wagiminator/attiny85-lipo-charger
@@ -8,7 +8,7 @@ TinyCharger is an ATtiny25/45/85-based, single-cell Li-ion battery charger with 
 
 # Hardware
 ## Power Connectors
-The device is equipped with a Micro-USB and a USB-C connector for power supply. Only one connector can be used at a time. The supply voltage must be 5V.
+The device is equipped with a Micro-USB and a USB Type-C connector for power supply. Only one connector can be used at a time. The supply voltage must be 5V.
 
 ## Battery Connectors
 The device is equipped with a JST-PH 2.0mm socket and a 2.54mm pin header for connection to the battery. Only one battery can be charged at a time.
@@ -20,7 +20,7 @@ For battery charging the [TP4056](https://datasheet.lcsc.com/szlcsc/1904031009_T
 An [INA219](https://www.ti.com/lit/ds/symlink/ina219.pdf) is used to measure voltage and current. The INA219 is a current shunt and power monitor with an I²C-compatible interface. The device monitors both shunt voltage drop and bus supply voltage, with programmable conversion times and filtering. A programmable calibration value, combined with an internal multiplier, enables direct readouts of current in amperes. The selected shunt resistance of 8mΩ enables both a very small influence on the circuit and a measurement with a resolution of 1mA. For an accurate measurement, a shunt resistor with a low tolerance (1% or better) should be selected.
 
 ## User Interface
-The user interface utilizes two buttons and a [128x64 pixels OLED display](http://aliexpress.com/wholesale?SearchText=128+64+0.96+oled+new+4pin). An [ATtiny25/45/85](https://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-2586-AVR-8-bit-Microcontroller-ATtiny25-ATtiny45-ATtiny85_Datasheet.pdf) microcontroller handles the user interface as well as the control and monitoring of the charging functions.
+The user interface utilizes two buttons and an [SSD1306 128x32 pixels OLED display](http://aliexpress.com/wholesale?SearchText=128+32+0.91+oled). An [ATtiny25/45/85](https://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-2586-AVR-8-bit-Microcontroller-ATtiny25-ATtiny45-ATtiny85_Datasheet.pdf) microcontroller handles the user interface as well as the control and monitoring of the charging functions.
 
 ![pic4.jpg](https://raw.githubusercontent.com/wagiminator/ATtiny85-TinyCharger/main/documentation/TinyCharger_pic4.jpg)
 
@@ -69,7 +69,7 @@ Since there is no ICSP header on the board, you have to program the ATtiny eithe
 - Run "make install" to compile, burn the fuses and upload the firmware.
 
 # Operating Instructions
-1. Connect the device via the Micro-USB or USB-C port to a 5V power supply that can provide sufficient current.
+1. Connect the device via the Micro-USB or USB Type-C port to a 5V power supply that can provide sufficient current.
 2. Use the SET button to select the maximum charging current. Note that it can overshoot by a few milliamperes!
 3. Connect the Li-Ion battery to one of the battery connectors. Pay attention to the correct polarity!
 4. The battery is charged immediately. The SET button is locked during the charging process to prevent the charging current from being changed accidentally. The charging process stops automatically when the battery is fully charged. The total charging time and the charged capacity remain displayed as long as the device is supplied with power. These values can be reset using the RESET button.
@@ -90,6 +90,7 @@ Since there is no ICSP header on the board, you have to program the ATtiny eithe
 2. [TP4056 Datasheet](https://datasheet.lcsc.com/szlcsc/1904031009_TPOWER-TP4056_C382139.pdf)
 3. [INA219 Datasheet](https://www.ti.com/lit/ds/symlink/ina219.pdf)
 4. [SSD1306 Datasheet](https://cdn-shop.adafruit.com/datasheets/SSD1306.pdf)
+5. [128x32 OLED on Aliexpress](http://aliexpress.com/wholesale?SearchText=128+32+0.91+oled)
 
 ![pic2.jpg](https://raw.githubusercontent.com/wagiminator/ATtiny85-TinyCharger/main/documentation/TinyCharger_pic2.jpg)
 ![pic3.jpg](https://raw.githubusercontent.com/wagiminator/ATtiny85-TinyCharger/main/documentation/TinyCharger_pic3.jpg)
